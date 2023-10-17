@@ -30,7 +30,7 @@ def generate_image(url):
     if html_content:
         soup = BeautifulSoup(html_content, "html.parser")
         body = soup.find('body')
-        image = body.find("img", {'title': True, 'src': True})
+        image = body.find("img")
         print("image: success!") if image else 0
         return image['src'] if image else 0
     

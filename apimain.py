@@ -8,7 +8,7 @@ def store_json():
     global stored_payload
     json_data = request.get_json()
     stored_payload = json_data
-    return "JSON payload stored successfully", 201
+    return "JSON payload stored successfully", 200
 
 @app.route('/get', methods=['GET'])
 def get_json():
