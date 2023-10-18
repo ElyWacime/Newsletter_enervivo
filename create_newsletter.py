@@ -99,6 +99,8 @@ generate_article_for_event_agri()
 generate_article_for_tech_entpr()
 generate_article_for_monde()"""
 
+newsletter_key = input("Please enter the date of your newsletter month/year (example: janvier23, september23): ")
+
 data = json.dumps(FINAL_DICT)
-send_post_reauest(data=data, url="http://127.0.0.1:5000/store")
+send_post_reauest(data=data, url=f"http://127.0.0.1:5000/store?key={newsletter_key}")
 print(data)
