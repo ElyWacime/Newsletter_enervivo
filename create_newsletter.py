@@ -94,13 +94,16 @@ def generate_article_for_monde():
                     section="monde", final_dict=FINAL_DICT, i=i)
         i+=1
 
-generate_article_for_event_agri()
-"""generate_article_for_march_regl()
-generate_article_for_tech_entpr()
-generate_article_for_monde()"""
+def main():
+    generate_article_for_event_agri()
+    generate_article_for_march_regl()
+    generate_article_for_tech_entpr()
+    generate_article_for_monde()
 
-newsletter_key = input("Please enter the date of your newsletter month/year (example: janvier23, september23): ")
+    newsletter_key = input("Please enter the date of your newsletter month/year (example: janvier23, september23): ")
 
-data = json.dumps(FINAL_DICT)
-send_post_reauest(data=data, url=f"http://127.0.0.1:5000/store?key={newsletter_key}")
-print(data)
+    data = json.dumps(FINAL_DICT)
+    send_post_reauest(data=data, url=f"http://82.165.34.79/store?key={newsletter_key}")
+    print(data)
+
+main()

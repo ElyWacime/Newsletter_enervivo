@@ -48,8 +48,19 @@ def send_post_reauest(data, url):
     else:
         print(f"POST request failed with status code {response.status_code}: {response.text}")
 
+def extract_all_images(url):
+    res = requests.get(url, headers={"User-Agent": "Mozilla/5,0"})
+    if res.status_code == 200:
+        soup = BeautifulSoup(res.text, 'html.parser')
+        images = soup.find_all("img")
+        return images
+
 '''print(generate_title("https://tecsol.blogs.com/mon_weblog/2023/07/loi-dacc%C3%A9l%C3%A9ration-sur-les-%C3%A9nergies-renouvelables-aer-quelles-opportunit%C3%A9s-pour-le-photovolta%C3%AFque-sur.html"))
+
 print("----------------")
+
 print(generate_description("https://tecsol.blogs.com/mon_weblog/2023/07/loi-dacc%C3%A9l%C3%A9ration-sur-les-%C3%A9nergies-renouvelables-aer-quelles-opportunit%C3%A9s-pour-le-photovolta%C3%AFque-sur.html"))
+
 print("----------------")
+
 print(generate_image("https://tecsol.blogs.com/mon_weblog/2023/07/loi-dacc%C3%A9l%C3%A9ration-sur-les-%C3%A9nergies-renouvelables-aer-quelles-opportunit%C3%A9s-pour-le-photovolta%C3%AFque-sur.html"))'''

@@ -1,0 +1,24 @@
+# Nmap 7.80 scan initiated Thu Oct 19 20:03:47 2023 as: nmap -sC -sV -oA namp 82.165.34.79
+Nmap scan report for ip82-165-34-79.pbiaas.com (82.165.34.79)
+Host is up (0.057s latency).
+Not shown: 997 filtered ports
+PORT    STATE SERVICE  VERSION
+22/tcp  open  ssh      OpenSSH 8.2p1 Ubuntu 4ubuntu0.9 (Ubuntu Linux; protocol 2.0)
+80/tcp  open  http     nginx 1.18.0 (Ubuntu)
+|_http-server-header: nginx/1.18.0 (Ubuntu)
+|_http-title: Welcome to nginx!
+443/tcp open  ssl/http nginx 1.18.0 (Ubuntu)
+|_http-server-header: nginx/1.18.0 (Ubuntu)
+|_http-title: Welcome to nginx!
+| ssl-cert: Subject: commonName=*.enervivo.fr
+| Subject Alternative Name: DNS:*.enervivo.fr, DNS:enervivo.fr
+| Not valid before: 2023-08-15T00:00:00
+|_Not valid after:  2024-08-14T23:59:59
+| tls-alpn: 
+|_  http/1.1
+| tls-nextprotoneg: 
+|_  http/1.1
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Oct 19 20:04:08 2023 -- 1 IP address (1 host up) scanned in 21.22 seconds
