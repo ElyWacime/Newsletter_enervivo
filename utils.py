@@ -56,6 +56,23 @@ def generate_image(url):
     else:
         image = input("Web scraping is not allowed please enter the image src code manully: ")
         return image
+
+def generate_date(url):
+    html_content = get_html_content(url)
+    if html_content:
+        soup = BeautifulSoup(html_content, "html.parser")
+        meta_tag = soup.find('meta', attrs={'property': 'og:updated_time'})
+        if meta_tag:
+            title = meta_tag["content"]
+            return title
+        else:
+            time_tag = soup.find('time', attrs={'itemprop': 'dateCreated'})
+            if time_tag:
+                title = time_tag.get_text(strip=True)
+                return title
+            else:
+                return None
+        
     
 def generate_dict(title, description, image, final_dict, section, i):
     final_dict[section][str(i)] = {"title": title,
@@ -77,13 +94,5 @@ def extract_all_images(url):
         soup = BeautifulSoup(res.text, 'html.parser')
         images = soup.find_all("img")
         return images
-
-'''print(generate_title("https://tecsol.blogs.com/mon_weblog/2023/07/loi-dacc%C3%A9l%C3%A9ration-sur-les-%C3%A9nergies-renouvelables-aer-quelles-opportunit%C3%A9s-pour-le-photovolta%C3%AFque-sur.html"))
-
-print("----------------")
-
-print(generate_description("https://tecsol.blogs.com/mon_weblog/2023/07/loi-dacc%C3%A9l%C3%A9ration-sur-les-%C3%A9nergies-renouvelables-aer-quelles-opportunit%C3%A9s-pour-le-photovolta%C3%AFque-sur.html"))
-
-print("----------------")
-
-print(generate_image("https://tecsol.blogs.com/mon_weblog/2023/07/loi-dacc%C3%A9l%C3%A9ration-sur-les-%C3%A9nergies-renouvelables-aer-quelles-opportunit%C3%A9s-pour-le-photovolta%C3%AFque-sur.html"))'''
+    
+print(generate_date("https://www.lafranceagricole.fr/ovins-et-caprins/article/844133/tech-ovin-une-edition-tournee-vers-la-durabilite"))
