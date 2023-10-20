@@ -41,27 +41,11 @@ def generate_title(url):
         title = input("Web scraping is not allowed please enter the title manully: ")
         return title
     
-"""def generate_image(url):
-    html_content = get_html_content(url)
-    if html_content:
-        soup = BeautifulSoup(html_content, "html.parser")
-        body = soup.find('body')
-        image = body.find("img")
-        if image:
-            print("image: success!")
-        else:
-            image = input("Please enter the image src code manully: ")
-            return image
-        return image['src'] if image else 0
-    else:
-        image = input("Web scraping is not allowed please enter the image src code manully: ")
-        return image"""
 
 def generate_image(url):
     html_content = get_html_content(url)
     if html_content:
         soup = BeautifulSoup(html_content, "html.parser")
-        #body = soup.find('body')
         
         images = soup.find_all("img")
         
@@ -140,5 +124,3 @@ def edit_newsletter_date(newsletter_key):
 def generate_description_for_newsletter():
     description = input("Please enter the description for the newsletter: ")
     return description
-
-edit_newsletter_date("fuck off")
