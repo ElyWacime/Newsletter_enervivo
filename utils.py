@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from urllib.parse import urlparse
 
 def get_html_content(url):
     res = requests.get(url)
@@ -52,7 +53,13 @@ def generate_image(url):
         for image in images:
             src = image.get('src')
             
-            if src and '.svg' not in src:
+            if src and '.svg' not in src and ".png" not in src:
+                if "https" not in src:
+                    parsed_url = urlparse(url)
+                    domaine = parsed_url.netloc
+                    src = "https://" + domaine + src
+                    print("Image: success!")
+                    return src
                 print("Image: success!")
                 return src
 
