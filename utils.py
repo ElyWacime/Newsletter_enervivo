@@ -14,16 +14,32 @@ def generate_description(url):
     if html_content:
         soup = BeautifulSoup(html_content, "html.parser")
         description = soup.find('meta', attrs={'name': 'description'})
-        print("description: succsess!") if description else 0
+        if description:
+            print("description: success!")
+        else:
+            description = input("Please enter the description manualy: ")
+            return description
         return description['content'] if description else 0
+    else:
+        description = input("Web scraping is not allowed please enter the description manully: ")
+        return description
     
 def generate_title(url):
     html_content = get_html_content(url)
     if html_content:
         soup = BeautifulSoup(html_content, 'html.parser')
         title = soup.find('title')
-        print("title: success!") if title else 0
+        if title == None:
+            title = soup.find('h1')
+        if title:
+            print("title: success!")
+        else:
+            title = input("Please enter the title manully: ")
+            return title
         return title.get_text() if title else 0
+    else:
+        title = input("Web scraping is not allowed please enter the title manully: ")
+        return title
     
 def generate_image(url):
     html_content = get_html_content(url)
@@ -31,8 +47,15 @@ def generate_image(url):
         soup = BeautifulSoup(html_content, "html.parser")
         body = soup.find('body')
         image = body.find("img")
-        print("image: success!") if image else 0
+        if image:
+            print("image: success!")
+        else:
+            image = input("Please enter the image src code manully: ")
+            return image
         return image['src'] if image else 0
+    else:
+        image = input("Web scraping is not allowed please enter the image src code manully: ")
+        return image
     
 def generate_dict(title, description, image, final_dict, section, i):
     final_dict[section][str(i)] = {"title": title,

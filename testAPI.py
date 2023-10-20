@@ -1,5 +1,4 @@
 import requests
 
-res = requests.get(url="http://82.165.34.79/get")
-
+res = requests.post("https://api.enervivo.fr/get")
 print(res.content)

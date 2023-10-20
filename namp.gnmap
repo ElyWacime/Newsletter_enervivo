@@ -1,4 +1,0 @@
-# Nmap 7.80 scan initiated Thu Oct 19 20:03:47 2023 as: nmap -sC -sV -oA namp 82.165.34.79
-Host: 82.165.34.79 (ip82-165-34-79.pbiaas.com)	Status: Up
-Host: 82.165.34.79 (ip82-165-34-79.pbiaas.com)	Ports: 22/open/tcp//ssh//OpenSSH 8.2p1 Ubuntu 4ubuntu0.9 (Ubuntu Linux; protocol 2.0)/, 80/open/tcp//http//nginx 1.18.0 (Ubuntu)/, 443/open/tcp//ssl|http//nginx 1.18.0 (Ubuntu)/	Ignored State: filtered (997)
-# Nmap done at Thu Oct 19 20:04:08 2023 -- 1 IP address (1 host up) scanned in 21.22 seconds

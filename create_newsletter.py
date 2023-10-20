@@ -103,7 +103,7 @@ def main():
     newsletter_key = input("Please enter the date of your newsletter month/year (example: janvier23, september23): ")
 
     data = json.dumps(FINAL_DICT)
-    send_post_reauest(data=data, url=f"http://82.165.34.79/store?key={newsletter_key}")
+    send_post_reauest(data=data, url=f"http://api.enervivo.fr/store?key={newsletter_key}")
     print(data)
 
 main()
