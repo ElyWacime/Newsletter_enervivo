@@ -41,7 +41,7 @@ def generate_title(url):
         title = input("Web scraping is not allowed please enter the title manully: ")
         return title
     
-def generate_image(url):
+"""def generate_image(url):
     html_content = get_html_content(url)
     if html_content:
         soup = BeautifulSoup(html_content, "html.parser")
@@ -55,6 +55,28 @@ def generate_image(url):
         return image['src'] if image else 0
     else:
         image = input("Web scraping is not allowed please enter the image src code manully: ")
+        return image"""
+
+def generate_image(url):
+    html_content = get_html_content(url)
+    if html_content:
+        soup = BeautifulSoup(html_content, "html.parser")
+        #body = soup.find('body')
+        
+        images = soup.find_all("img")
+        
+        for image in images:
+            src = image.get('src')
+            
+            if src and '.svg' not in src:
+                print("Image: success!")
+                return src
+
+        image = input("No suitable image found. Please enter the image src code manually: ")
+        return image
+        
+    else:
+        image = input("Web scraping is not allowed. Please enter the image src code manually: ")
         return image
 
 def generate_date(url):
@@ -74,10 +96,13 @@ def generate_date(url):
                 return None
         
     
-def generate_dict(title, description, image, final_dict, section, i):
+def generate_dict(url, domaine, title, description, image, final_dict, section, i, date):
     final_dict[section][str(i)] = {"title": title,
                         "description": description,
-                        "image": image}
+                        "image": image,
+                        "date": date,
+                        "domaine": domaine,
+                        "url": url}
     return final_dict
 
 def send_post_reauest(data, url):
@@ -95,4 +120,25 @@ def extract_all_images(url):
         images = soup.find_all("img")
         return images
     
-print(generate_date("https://www.lafranceagricole.fr/ovins-et-caprins/article/844133/tech-ovin-une-edition-tournee-vers-la-durabilite"))
+def edit_newsletter_date(newsletter_key):
+    try:
+        with open("newsletter.html", "r") as file:
+            file_contents = file.read()
+    except FileNotFoundError:
+        print("Couldn't find the html file!")
+    try:
+        if "EDIT THIS STRING" in file_contents:
+            new_content = file_contents.replace("**EDIT THIS STRING**", newsletter_key)
+            try:
+                with open("newsletter01.html", "w") as file:
+                    file.write(new_content)
+            except FileNotFoundError:
+                print("Couldn't find the html file!")
+    except UnboundLocalError:
+        return 0
+    
+def generate_description_for_newsletter():
+    description = input("Please enter the description for the newsletter: ")
+    return description
+
+edit_newsletter_date("fuck off")

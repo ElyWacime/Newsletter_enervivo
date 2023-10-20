@@ -1,5 +1,6 @@
 from utils import *
 import json
+from urllib.parse import urlparse
 
 FINAL_DICT = {}
 
@@ -21,7 +22,10 @@ def generate_article_for_event_agri():
         description = generate_description(url)
         title = generate_title(url)
         image = generate_image(url)
-        generate_dict(title=title, image=image, description=description,
+        date = generate_date(url)
+        parsed_url = urlparse(url)
+        domaine = parsed_url.netloc
+        generate_dict(url=url, domaine=domaine, date=date, title=title, image=image, description=description,
                     section="Evenements_agrivoltaiques", final_dict=FINAL_DICT, i=i)
         i+=1
 
@@ -44,7 +48,10 @@ def generate_article_for_march_regl():
         description = generate_description(url)
         title = generate_title(url)
         image = generate_image(url)
-        generate_dict(title=title, image=image, description=description,
+        date = generate_date(url)
+        parsed_url = urlparse(url)
+        domaine = parsed_url.netloc
+        generate_dict(url=url, domaine=domaine, date=date, title=title, image=image, description=description,
                     section="Marche_&_Reglementation", final_dict=FINAL_DICT, i=i)
         i+=1
 
@@ -67,7 +74,10 @@ def generate_article_for_tech_entpr():
         description = generate_description(url)
         title = generate_title(url)
         image = generate_image(url)
-        generate_dict(title=title, image=image, description=description,
+        date = generate_date(url)
+        parsed_url = urlparse(url)
+        domaine = parsed_url.netloc
+        generate_dict(url=url, domaine=domaine, date=date, title=title, image=image, description=description,
                     section="Technologie, R&D et entreprises", final_dict=FINAL_DICT, i=i)
         i+=1
 
@@ -90,7 +100,10 @@ def generate_article_for_monde():
         description = generate_description(url)
         title = generate_title(url)
         image = generate_image(url)
-        generate_dict(title=title, image=image, description=description,
+        date = generate_date(url)
+        parsed_url = urlparse(url)
+        domaine = parsed_url.netloc
+        generate_dict(url=url, domaine=domaine, date=date, title=title, image=image, description=description,
                     section="monde", final_dict=FINAL_DICT, i=i)
         i+=1
 
@@ -101,9 +114,10 @@ def main():
     generate_article_for_monde()
 
     newsletter_key = input("Please enter the date of your newsletter month/year (example: janvier23, september23): ")
-
+    FINAL_DICT["newsletter_description"] = generate_description_for_newsletter()
     data = json.dumps(FINAL_DICT)
     send_post_reauest(data=data, url=f"http://api.enervivo.fr/store?key={newsletter_key}")
+    edit_newsletter_date(newsletter_key)
     print(data)
 
 main()
