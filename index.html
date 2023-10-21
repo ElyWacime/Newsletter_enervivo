@@ -172,16 +172,18 @@
 <script>
     const container = document.getElementById("content");
     const header = document.getElementById("header");
-
+    const date = "thisOneIsAmazing"
 
     fetch("https://api.enervivo.fr/get")
         .then(res => res.json())
-        .then(data => iteratTheData(data))
+        .then(data => {
+            iteratTheData(data);
+            lokingForTheLastItem(data)})
         .catch(error => console.error("Error fetching data:", error));
 
     const iteratTheData = (data) => {
         for (obj of data) {
-                if (obj.hasOwnProperty("fuckingLast")){
+                if (obj.hasOwnProperty(date)){
                     const arrOfObj = Object.entries(obj);
                     arrOfObj.map(([key, value]) => {
                         const valueArr = Object.entries(value);
@@ -192,6 +194,9 @@
                                 header.append(des_par);
                                 break;
                             }
+                            if (key === "Les actualit\u00e9s d'EnerVivo"){
+                                continue;
+                            }
                             const h2 = document.createElement('h2');
                             h2.innerHTML = `${key}`;
                             container.append(h2);
@@ -199,6 +204,29 @@
                             valueArr2.map(([key, value]) => {
                                 container.append(display(value))
                             })
+                        }
+                    })
+                }
+            }
+    }
+
+    const lokingForTheLastItem = (data) => {
+        for (obj of data) {
+                if (obj.hasOwnProperty(date)){
+                    const arrOfObj = Object.entries(obj);
+                    arrOfObj.map(([key, value]) => {
+                        const valueArr = Object.entries(value);
+                        for([key, value] of valueArr) { 
+                            if (key === "Les actualit\u00e9s d'EnerVivo"){
+                                const h2 = document.createElement('h2');
+                                h2.innerHTML = `${key}`;
+                                container.append(h2);
+                                const valueArr2 = Object.entries(value);
+                                valueArr2.map(([key, value]) => {
+                                    container.append(display(value))
+                                }) 
+                            }
+                            
                         }
                     })
                 }
