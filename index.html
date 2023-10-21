@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&amp;display=swap" rel="stylesheet">
     <style>
         body{
-            padding: 10px 50px;
+            padding: 5px 10px;
             font-family: Montserrat, Arial, sans-serif;
             font-size: 14px;
             background-color: #eaebf1;
@@ -120,7 +120,7 @@
         }
         @media (max-width: 768px) {
             .container {
-                width: 90%;
+                width: 100%;
             }
 
             .article {
@@ -175,7 +175,7 @@
 
     const iteratTheData = (data) => {
         for (obj of data) {
-                if (obj.hasOwnProperty("whoresTime")){
+                if (obj.hasOwnProperty("thisOneShoulFuckingWork")){
                     const arrOfObj = Object.entries(obj);
                     arrOfObj.map(([key, value]) => {
                         const valueArr = Object.entries(value);
