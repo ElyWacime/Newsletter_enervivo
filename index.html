@@ -74,12 +74,13 @@
         }
         .article{
             display: flex;
-            flex-wrap: wrap;
+            /*flex-wrap: wrap;*/
             margin: 10px;
         }
         .article_img{
             flex: 1;
             max-width: 100px;
+            width: 20%;
             height: auto;
             margin-right: 10px;
         }
@@ -124,12 +125,12 @@
             }
 
             .article {
-                flex-direction: column;
+                flex-direction: row;
             }
 
             .article_img {
-                max-width: 100%;
-                margin-right: 0;
+                max-width: 150px;
+                margin-right: 10px;
             }
         }
     </style>
@@ -175,7 +176,7 @@
 
     const iteratTheData = (data) => {
         for (obj of data) {
-                if (obj.hasOwnProperty("thisOneShoulFuckingWork")){
+                if (obj.hasOwnProperty("imageCorrection")){
                     const arrOfObj = Object.entries(obj);
                     arrOfObj.map(([key, value]) => {
                         const valueArr = Object.entries(value);
