@@ -43,7 +43,7 @@ def generate_title(url):
         return title
     
 
-def generate_image(url):
+"""def generate_image(url):
     html_content = get_html_content(url)
     if html_content:
         soup = BeautifulSoup(html_content, "html.parser")
@@ -68,7 +68,13 @@ def generate_image(url):
         
     else:
         image = input("Web scraping is not allowed. Please enter the image src code manually: ")
-        return image
+        return image"""
+
+def generate_image(article):
+    image = None
+    while (image == None):
+        image = input(f"Please enter the image source code for {article}: ")
+    return image
 
 def generate_date(url):
     html_content = get_html_content(url)
@@ -113,7 +119,7 @@ def extract_all_images(url):
     
 def edit_newsletter_date(newsletter_key):
     try:
-        with open("newsletter.html", "r") as file:
+        with open("index.html", "r") as file:
             file_contents = file.read()
     except FileNotFoundError:
         print("Couldn't find the html file!")
@@ -121,7 +127,7 @@ def edit_newsletter_date(newsletter_key):
         if "EDIT THIS STRING" in file_contents:
             new_content = file_contents.replace("**EDIT THIS STRING**", newsletter_key)
             try:
-                with open("newsletter01.html", "w") as file:
+                with open("newsletter.html", "w") as file:
                     file.write(new_content)
             except FileNotFoundError:
                 print("Couldn't find the html file!")
@@ -131,3 +137,19 @@ def edit_newsletter_date(newsletter_key):
 def generate_description_for_newsletter():
     description = input("Please enter the description for the newsletter: ")
     return description
+
+def change_description(description):
+    change = input(f"Is this the description that you wanna publish?\n{description}\n(answer: y/n): ")
+    if change == "n":
+        new_description = input("Please enter the new description: ")
+        return new_description
+    else:
+        return description
+    
+def change_title(title):
+    change = input(f"Is this the title that you wanna publish?\n{title}\n(answer: y/n): ")
+    if change == "n":
+        new_title = input("Please enter the new description: ")
+        return new_title
+    else:
+        return title

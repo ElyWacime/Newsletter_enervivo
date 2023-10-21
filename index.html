@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter agrivoltaïsme - EnerVivo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <style>
+        body{
+        padding: 10px 10%;
+        font-family: Montserrat, Arial, sans-serif;
+        font-size: 14px;
+        background-color: #eaebf1;
+        }
+        .container{
+            font-family: Montserrat, Arial, sans-serif;
+            font-size: 15px;
+            background-color: #fff;
+            padding: 6px 10px;
+            border-radius: 10px;
+            box-shadow: 5px 3px rgba(94, 86, 86, 0.3);
+        }
+        h1{
+            text-align: center;
+            color: #1c7861;
+        }
+        h2{
+            font-size: larger;
+            text-align: center;
+            color: #fff;
+            background-color: rgb(26, 122, 34);
+        }
+        h5{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .parent_article{
+            background-color: #f6f7fb;
+            padding: 5px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .parent_article:hover{
+            transform: scale(1.1);
+        }
+        .article_title a{
+            text-decoration: none;
+            color: #1c7861;
+        }
+        .read_more a{
+            color: #333;
+            text-decoration: double;
+        }
+        .article_title{
+            font-size: large;
+            color: #1c7861;
+            margin: 6px;
+        }
+        .date_domaine{
+            margin-bottom: 5px;
+            color: aqua;
+        }
+        .article{
+            display: flex;
+            margin: 10px;
+        }
+        .article_img{
+            flex: 1;
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer_div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer_div img {
+            order: -1;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center; 
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul a {
+            text-decoration: none;
+            color: #333;
+            padding: 5px;
+        }
+
+        nav ul a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header id="header">
+            <h5>Si vous ne visualisez pas correctement le contenu, ouvrez <a href="index.html">cette page</a></h5>
+            <img src="https://www.mytwip.com/public_new/skins/enervivo/pics/newsletter/enervivo-v2.png" alt="" width="100%">
+            <h1>Newsletter agrivoltaïsme - EnerVivo</h1>
+            
+        </header>
+        <section id="content">  
+        </section>
+</div>
+<footer>
+    <div class="footer_div">
+        <img src="https://enervivo.fr/wp-content/uploads/2022/09/2_Logotype_vert-foret-e1664460441226.png" width="30%">
+        <nav>
+            <ul>
+                <a href="https://enervivo.fr/contact/">Nous contacter</a>
+            </ul>
+            <ul>
+                <a href="https://www.linkedin.com/company/enervivo/">LinkedIn</a>
+            </ul>
+            <ul>
+                <a href="https://enervivo.fr/gerer-vote-abonnement/">Gérer votre abonnement</a>
+            </ul>
+        </nav>
+    </div>
+</footer>
+    
+</body>
+<script>
+    const container = document.getElementById("content");
+    const header = document.getElementById("header");
+
+
+    fetch("https://api.enervivo.fr/get")
+        .then(res => res.json())
+        .then(data => {
+            for (obj of data) {
+                if (obj.hasOwnProperty("**EDIT THIS STRING**")){
+                    const arrOfObj = Object.entries(obj);
+                    arrOfObj.map(([key, value]) => {
+                        const valueArr = Object.entries(value);
+                        for([key, value] of valueArr) {                            
+                            if (key === "newsletter_description"){
+                                console.log(key);
+                                const des_par = document.createElement('p')
+                                des_par.innerHTML = `${value}`;
+                                header.append(des_par);
+                                break;
+                            }
+                            const h2 = document.createElement('h2');
+                            h2.innerHTML = `${key}`;
+                            container.append(h2);
+                            const valueArr2 = Object.entries(value);
+                            valueArr2.map(([key, value]) => {
+                                container.append(display(value))
+                            })
+                        }
+                    })
+                }
+            }
+            }
+        )
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
+
+    function display({title, image, description, date, domaine, url}){
+
+        
+        const article = document.createElement('div');
+
+        article.classList.add("parent_article");
+        article.innerHTML = `
+        <div class="article_title"><a href="${url}" target="_blank">${title}</a></div>
+        <div class="article">
+            <img src="${image}" class="article_img">
+            <div class="article_content">
+                <div class="date_domaine">${date} - ${domaine}</div>
+                <div class="description">${description}</div>
+                <div class="read_more"><a href="${url}" target="_blank">Lire la suite</a></div>
+            </div>
+        </div>`;
+
+        return article;
+    }
+</script>
+</html>

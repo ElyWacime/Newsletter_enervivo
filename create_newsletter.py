@@ -20,7 +20,9 @@ def generate_article_for_event_agri():
     while(i < articles):
         url = input(f"Enter the link for the {i+1} article: ")
         description = generate_description(url)
+        description = change_description(description)
         title = generate_title(url)
+        title = change_title(title)
         image = generate_image(url)
         date = generate_date(url)
         parsed_url = urlparse(url)
@@ -46,7 +48,9 @@ def generate_article_for_march_regl():
     while(i < articles):
         url = input(f"Enter the link for the {i+1} article: ")
         description = generate_description(url)
+        description = change_description(description)
         title = generate_title(url)
+        title = change_title(title)
         image = generate_image(url)
         date = generate_date(url)
         parsed_url = urlparse(url)
@@ -72,7 +76,9 @@ def generate_article_for_tech_entpr():
     while(i < articles):
         url = input(f"Enter the link for the {i+1} article: ")
         description = generate_description(url)
+        description = change_description(description)
         title = generate_title(url)
+        title = change_title(title)
         image = generate_image(url)
         date = generate_date(url)
         parsed_url = urlparse(url)
@@ -98,7 +104,9 @@ def generate_article_for_monde():
     while(i < articles):
         url = input(f"Enter the link for the {i+1} article: ")
         description = generate_description(url)
+        description = change_description(description)
         title = generate_title(url)
+        title = change_title(title)
         image = generate_image(url)
         date = generate_date(url)
         parsed_url = urlparse(url)
