@@ -19,7 +19,7 @@
             max-width: 100%;
             width: 80%;
             font-family: Montserrat, Arial, sans-serif;
-            font-size: 14px;
+            font-size: 16px;
             background-color: #fff;
             padding: 6px 10px;
             border-radius: 10px;
@@ -53,7 +53,7 @@
             text-decoration: none;
             color: #1c7861;
             font-weight: bolder;
-            font-size: 14px;
+            font-size: 20px;
         }
         .read_more a{
             color: #333;
@@ -70,16 +70,17 @@
             font-family: Montserrat, Arial, sans-serif;
         }
         .description{
-            font-size: 10pt;
+            font-size: 16pt;
         }
         .article{
             display: flex;
-            flex-wrap: wrap;
+            /*flex-wrap: wrap;*/
             margin: 10px;
         }
         .article_img{
             flex: 1;
             max-width: 100px;
+            width: 20%;
             height: auto;
             margin-right: 10px;
         }
@@ -124,12 +125,12 @@
             }
 
             .article {
-                flex-direction: column;
+                flex-direction: row;
             }
 
             .article_img {
-                max-width: 100%;
-                margin-right: 0;
+                max-width: 150px;
+                margin-right: 10px;
             }
         }
     </style>
@@ -175,7 +176,7 @@
 
     const iteratTheData = (data) => {
         for (obj of data) {
-                if (obj.hasOwnProperty("fuckingHell")){
+                if (obj.hasOwnProperty("fuckingLast")){
                     const arrOfObj = Object.entries(obj);
                     arrOfObj.map(([key, value]) => {
                         const valueArr = Object.entries(value);
