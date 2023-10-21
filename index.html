@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Newsletter agrivoltaïsme - EnerVivo</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&amp;display=swap" rel="stylesheet">
     <style>
@@ -16,7 +16,8 @@
             align-items: center;
         }
         .container{
-            max-width: 60%;
+            max-width: 100%;
+            width: 80%;
             font-family: Montserrat, Arial, sans-serif;
             font-size: 14px;
             background-color: #fff;
@@ -73,11 +74,12 @@
         }
         .article{
             display: flex;
+            flex-wrap: wrap;
             margin: 10px;
         }
         .article_img{
             flex: 1;
-            width: 100px;
+            max-width: 100px;
             height: auto;
             margin-right: 10px;
         }
@@ -115,6 +117,21 @@
 
         nav ul a:hover {
             color: #007bff;
+        }
+        @media (max-width: 768px) {
+        /* Adjust styles for screens with a maximum width of 768px (tablets and smaller) */
+            .container {
+                width: 90%;
+            }
+
+            .article {
+                flex-direction: column; /* Stack image and content on smaller screens */
+            }
+
+            .article_img {
+                max-width: 100%; /* Allow the image to take up the full width */
+                margin-right: 0;
+            }
         }
     </style>
 </head>
@@ -159,7 +176,7 @@
 
     const iteratTheData = (data) => {
         for (obj of data) {
-                if (obj.hasOwnProperty("thisOneShoulFuckingWork")){
+                if (obj.hasOwnProperty("whoresTime")){
                     const arrOfObj = Object.entries(obj);
                     arrOfObj.map(([key, value]) => {
                         const valueArr = Object.entries(value);
@@ -185,6 +202,9 @@
 
     const display = ({title, image, description, date, domaine, url}) => {
         
+        if (date == null){
+            date = "";
+        }
         const article = document.createElement('div');
 
         article.classList.add("parent_article");
