@@ -3,12 +3,15 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
 def get_html_content(url):
-    res = requests.get(url)
-    if res.status_code == 200:
-        return res.text
-    else:
-        print("Failed to retrieve the web page!")
-    return 0
+    try:        
+        res = requests.get(url)
+        if res.status_code == 200:
+            return res.text
+        else:
+            print("Failed to retrieve the web page!")
+        return 0
+    except requests.exceptions.ConnectionError:
+        return 0
 
 def generate_description(url):
     html_content = get_html_content(url)
@@ -22,7 +25,7 @@ def generate_description(url):
             return description
         return description['content'] if description else 0
     else:
-        description = input("Web scraping is not allowed please enter the description manully: ")
+        description = input("Please enter the description manully: ")
         return description
     
 def generate_title(url):
@@ -39,7 +42,7 @@ def generate_title(url):
             return title
         return title.get_text() if title else 0
     else:
-        title = input("Web scraping is not allowed please enter the title manully: ")
+        title = input("Please enter the title manully: ")
         return title
     
 
@@ -91,6 +94,9 @@ def generate_date(url):
                 return title
             else:
                 return None
+    else:
+        date = input("Please enter the date: ")
+        return date
         
     
 def generate_dict(url, domaine, title, description, image, final_dict, section, i, date):

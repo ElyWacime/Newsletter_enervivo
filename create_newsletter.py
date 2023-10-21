@@ -14,8 +14,8 @@ def generate_article_for_event_agri():
             articles = int(articles)
         except ValueError:
             print('Please pick an integer!')
-    if 'Evenements_agrivoltaiques' not in FINAL_DICT:
-        FINAL_DICT['Evenements_agrivoltaiques'] = {}
+    if 'Evènements agrivoltaïques' not in FINAL_DICT:
+        FINAL_DICT['Evènements agrivoltaïques'] = {}
     i = 0
     while(i < articles):
         url = input(f"Enter the link for the {i+1} article: ")
@@ -28,7 +28,7 @@ def generate_article_for_event_agri():
         parsed_url = urlparse(url)
         domaine = parsed_url.netloc
         generate_dict(url=url, domaine=domaine, date=date, title=title, image=image, description=description,
-                    section="Evenements_agrivoltaiques", final_dict=FINAL_DICT, i=i)
+                    section="Evènements agrivoltaïques", final_dict=FINAL_DICT, i=i)
         i+=1
 
 def generate_article_for_march_regl():
@@ -42,8 +42,8 @@ def generate_article_for_march_regl():
         except ValueError:
             print('Please pick an integer!')
         
-    if 'Marche_&_Reglementation' not in FINAL_DICT:
-        FINAL_DICT['Marche_&_Reglementation'] = {}
+    if 'Marché & Règlementation' not in FINAL_DICT:
+        FINAL_DICT['Marché & Règlementation'] = {}
     i = 0
     while(i < articles):
         url = input(f"Enter the link for the {i+1} article: ")
@@ -56,7 +56,7 @@ def generate_article_for_march_regl():
         parsed_url = urlparse(url)
         domaine = parsed_url.netloc
         generate_dict(url=url, domaine=domaine, date=date, title=title, image=image, description=description,
-                    section="Marche_&_Reglementation", final_dict=FINAL_DICT, i=i)
+                    section="Marché & Règlementation", final_dict=FINAL_DICT, i=i)
         i+=1
 
 def generate_article_for_tech_entpr():
@@ -115,11 +115,36 @@ def generate_article_for_monde():
                     section="monde", final_dict=FINAL_DICT, i=i)
         i+=1
 
+def generate_actualite():
+    articles = None
+    while type(articles) != int:    
+        articles = input(
+            "How many actuality would you like to genarate? "
+        )
+        try:
+            articles = int(articles)
+        except ValueError:
+            print('Please pick an integer!')
+        
+    if "Les actualités d'EnerVivo" not in FINAL_DICT:
+        FINAL_DICT["Les actualités d'EnerVivo"] = {}
+    i = 0
+    while(i < articles):
+        url = input(f"Enter the link for the {i+1} actuality: ")
+        description = generate_description("https://thisIsAJoke.io")
+        title = generate_title("https://thisIsAJoke.io")
+        image = generate_image(title)
+        date = generate_date("https://thisIsAJoke.io")
+        generate_dict(url=url, domaine="enervivo.fr", date=date, title=title, image=image, description=description,
+                    section="Les actualités d'EnerVivo", final_dict=FINAL_DICT, i=i)
+        i+=1
+
 def main():
     generate_article_for_event_agri()
     generate_article_for_march_regl()
     generate_article_for_tech_entpr()
     generate_article_for_monde()
+    generate_actualite()
 
     newsletter_key = input("Please enter the date of your newsletter month/year (example: janvier23, september23): ")
     FINAL_DICT["newsletter_description"] = generate_description_for_newsletter()
